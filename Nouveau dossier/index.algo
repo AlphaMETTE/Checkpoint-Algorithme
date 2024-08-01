@@ -1,0 +1,54 @@
+#include <stdio.h>
+    #include <ctype.h>
+    
+    // Fonction principale
+    int main() {
+        // Déclaration des compteurs
+        int longueurPhrase = 0;
+        int nombreMots = 0;
+        int nombreVoyelles = 0;
+    
+        // Variable pour stocker chaque caractère
+        char c;
+        // Indicateur pour les mots
+        int dansMot = 0;
+    
+        printf("Entrez une phrase qui se termine par un point:\n");
+    
+        // Lecture de la phrase caractère par caractère
+        while ((c = getchar()) != '.') {
+            // Incrémenter la longueur de la phrase pour chaque caractère
+            longueurPhrase++;
+    
+            // Vérifier si le caractère est une voyelle
+            if (tolower(c) == 'a' || tolower(c) == 'e' || tolower(c) == 'i' ||
+                tolower(c) == 'o' || tolower(c) == 'u' || tolower(c) == 'y') {
+                nombreVoyelles++;
+            }
+    
+            // Vérifier les espaces pour compter les mots
+            if (c == ' ') {
+                // Si on était dans un mot, cela signifie que le mot est terminé
+                if (dansMot) {
+                    nombreMots++;
+                    dansMot = 0; // Réinitialiser l'indicateur de mot
+                }
+            } else {
+                // Si le caractère n'est pas un espace, on est dans un mot
+                dansMot = 1;
+            }
+        }
+    
+        // Si la phrase ne se termine pas par un espace, on compte le dernier mot
+        if (dansMot) {
+            nombreMots++;
+        }
+    
+        // Afficher les résultats
+        printf("Longueur de la phrase: %d\n", longueurPhrase);
+        printf("Nombre de mots dans la phrase: %d\n", nombreMots);
+        printf("Nombre de voyelles dans la phrase: %d\n", nombreVoyelles);
+    
+        return 0;
+    }
+    
